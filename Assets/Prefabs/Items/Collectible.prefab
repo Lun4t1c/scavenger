@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1585566426137898324}
   - component: {fileID: 1492213615322703189}
   - component: {fileID: -2434578514755566302}
-  - component: {fileID: -330960141927371119}
+  - component: {fileID: 6245350566896224600}
   m_Layer: 0
   m_Name: Collectible
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1585566426137898324
 MeshFilter:
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-330960141927371119
+--- !u!114 &6245350566896224600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1941704423543505159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d07ea1a947f6554fb6f1fe757855341, type: 3}
+  m_Script: {fileID: 11500000, guid: 2389e2e9526a19042881c33645a6d004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
