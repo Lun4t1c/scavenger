@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolScript : WeaponBase
+public class UIScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,11 @@ public class PistolScript : WeaponBase
     // Update is called once per frame
     void Update()
     {
-        this.AmmoUpdate.Invoke();
+        
+    }
+
+    public void OnAmmoUpdate()
+    {
+        Debug.Log("BENG");
     }
 }
