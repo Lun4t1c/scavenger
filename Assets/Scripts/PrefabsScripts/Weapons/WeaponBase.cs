@@ -57,19 +57,11 @@ public abstract class WeaponBase : MonoBehaviour
             Vector3 rayOrigin = PlayerCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
             RaycastHit raycastHit;
 
-            LaserLine.SetPosition(0, GunEnd.position);
-
             if (Physics.Raycast(rayOrigin, PlayerCamera.transform.forward, out raycastHit, Range))
             {
-                LaserLine.SetPosition(1, raycastHit.point);
-
                 DestructibleBase destructible = raycastHit.collider.GetComponent<DestructibleBase>();
                 destructible?.Damage(Damage);
                 raycastHit.rigidbody?.AddForce(-raycastHit.normal * ImpactForce);
-            }
-            else
-            {
-                LaserLine.SetPosition(1, rayOrigin + (PlayerCamera.transform.forward * Range));
             }
 
             BulletsInMag--;
