@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public abstract class WeaponBase : MonoBehaviour
 {
     protected ushort BulletsInMag;
+    protected ushort Damage;
     protected ushort MagCapacity;
     protected ushort ShootCooldown;
     protected ushort TotalAmmo;
@@ -61,6 +62,10 @@ public abstract class WeaponBase : MonoBehaviour
             if (Physics.Raycast(rayOrigin, PlayerCamera.transform.forward, out raycastHit, Range))
             {
                 LaserLine.SetPosition(1, raycastHit.point);
+
+                DestructibleBase destructible = raycastHit.collider.GetComponent<DestructibleBase>();
+                destructible?.Damage(Damage);
+                raycastHit.rigidbody?.AddForce(-raycastHit.normal * ImpactForce);
             }
             else
             {

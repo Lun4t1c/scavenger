@@ -7,6 +7,7 @@ public class PistolScript : WeaponBase
     // Start is called before the first frame update
     void Start()
     {
+        Damage = 1;
         BulletsInMag = 15;
         MagCapacity = 15;
         ShootCooldown = 100;
