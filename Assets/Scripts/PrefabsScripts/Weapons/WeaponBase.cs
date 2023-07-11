@@ -5,16 +5,16 @@ using UnityEngine.Events;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-    protected ushort BulletsInMag;
-    protected ushort Damage;
-    protected ushort MagCapacity;
-    protected ushort ShootCooldown;
-    protected ushort TotalAmmo;
-    protected ushort MaxTotalAmmo;
+    public ushort BulletsInMag;
+    public ushort Damage;
+    public ushort MagCapacity;
+    public ushort ShootCooldown;
+    public ushort TotalAmmo;
+    public ushort MaxTotalAmmo;
+    public float ImpactForce;
 
     public float FireRate = .25f;
     public float Range = 50f;
-    public float ImpactForce = 100f;
     public Transform GunEnd;
 
     public AudioSource Audio;
@@ -23,17 +23,20 @@ public abstract class WeaponBase : MonoBehaviour
 
     private Camera PlayerCamera;
     private WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
-    private LineRenderer LaserLine;
     private float NextFire;
 
     protected void Start()
     {
-        LaserLine = GetComponent<LineRenderer>();
         Audio = GetComponent<AudioSource>();
         PlayerCamera = GetComponentInParent<Camera>();
         
         BulletsInMag = MagCapacity;
-        NotifyAmmoUpdate();
+    }
+
+    void OnEnable()
+    {
+        NotifyCurrentAmmoUpdate();
+        NotifyTotalAmmoUpdate();
     }
 
     protected void Update()
@@ -65,7 +68,7 @@ public abstract class WeaponBase : MonoBehaviour
             }
 
             BulletsInMag--;
-            NotifyAmmoUpdate();
+            NotifyCurrentAmmoUpdate();
         }
     }
 
@@ -74,20 +77,24 @@ public abstract class WeaponBase : MonoBehaviour
         Audio.PlayOneShot(ReloadSfx, 0.7f);
         TotalAmmo -= (ushort)(MagCapacity - BulletsInMag);
         BulletsInMag = MagCapacity;
-        NotifyAmmoUpdate();
+        NotifyCurrentAmmoUpdate();
+        NotifyTotalAmmoUpdate();
     }
 
-    protected void NotifyAmmoUpdate()
+    protected void NotifyCurrentAmmoUpdate()
     {
-        EventManager.OnAmmoUpdate?.Invoke($"{this.BulletsInMag}/{this.MagCapacity}");
+        EventManager.OnCurrentAmmoUpdate?.Invoke($"{this.BulletsInMag}/{this.MagCapacity}");
+    }
+
+    protected void NotifyTotalAmmoUpdate()
+    {
+        EventManager.OnTotalAmmoUpdate?.Invoke(TotalAmmo.ToString());
     }
 
     protected IEnumerator ShotEffect()
     {
         Audio.PlayOneShot(ShotSfx, 0.7f);
 
-        LaserLine.enabled = true;
         yield return ShotDuration;
-        LaserLine.enabled = false;
     }
 }

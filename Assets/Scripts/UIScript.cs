@@ -5,12 +5,15 @@ using TMPro;
 
 public class UIScript : MonoBehaviour
 {
-    public TMP_Text AmmoText;
+    public TMP_Text CurrentAmmoText;
+    public TMP_Text TotalAmmoText;
 
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.OnAmmoUpdate += UpdateAmmoText;
+        EventManager.OnWeaponChange += WeaponChange;
+        EventManager.OnCurrentAmmoUpdate += UpdateCurrentAmmoText;
+        EventManager.OnTotalAmmoUpdate += UpdateTotalAmmoText;
     }
 
     // Update is called once per frame
@@ -19,8 +22,19 @@ public class UIScript : MonoBehaviour
         
     }
 
-    public void UpdateAmmoText(string newText)
+    public void UpdateCurrentAmmoText(string newText)
     {
-        AmmoText.text = newText;
+        CurrentAmmoText.text = newText;
+    }
+
+    public void UpdateTotalAmmoText(string newText)
+    {
+        TotalAmmoText.text = newText;
+    }
+
+    public void WeaponChange(WeaponBase newWeapon)
+    {
+        UpdateCurrentAmmoText($"{newWeapon.BulletsInMag}/{newWeapon.MagCapacity}");
+        UpdateTotalAmmoText(newWeapon.TotalAmmo.ToString());
     }
 }

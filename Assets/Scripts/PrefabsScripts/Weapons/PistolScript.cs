@@ -13,6 +13,7 @@ public class PistolScript : WeaponBase
         ShootCooldown = 100;
         TotalAmmo = 100;
         MaxTotalAmmo = 100;
+        ImpactForce = 100f;
 
         base.Start();
     }

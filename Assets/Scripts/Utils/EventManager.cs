@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public delegate void AmmoUpdateEvent(string text);
-    public static AmmoUpdateEvent OnAmmoUpdate;
+    public delegate void TextUpdateEvent(string text);
+    public delegate void WeaponChangeEvent(WeaponBase weapon);
+
+    public static TextUpdateEvent OnCurrentAmmoUpdate;
+    public static TextUpdateEvent OnTotalAmmoUpdate;
+    public static WeaponChangeEvent OnWeaponChange;
+    
 
     // Start is called before the first frame update
     void Start()
