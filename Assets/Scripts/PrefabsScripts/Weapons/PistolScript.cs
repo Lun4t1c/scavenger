@@ -14,6 +14,8 @@ public class PistolScript : WeaponBase
         TotalAmmo = 100;
         MaxTotalAmmo = 100;
         ImpactForce = 100f;
+        FireRate = .1f;
+        Range = 50f;
 
         base.Start();
     }

@@ -14,6 +14,10 @@ public class FPPControls : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    public GameObject WeaponPlaceholderObject;
+    public GameObject Pistol;
+    public GameObject AssaultRifle;
+
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -31,6 +35,39 @@ public class FPPControls : MonoBehaviour
     }
 
     void Update()
+    {
+        FppMovement();
+        WeaponSwitch();
+    }
+
+    private void WeaponSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            GameObject childObject = WeaponPlaceholderObject.transform.Find("CurrentWeapon").gameObject;  
+            if (childObject != null)
+            {
+                Destroy(childObject);
+                GameObject weaponInstance = Instantiate(Pistol, WeaponPlaceholderObject.transform);
+                weaponInstance.name = "CurrentWeapon";
+                weaponInstance.transform.localPosition = Vector3.zero;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            GameObject childObject = WeaponPlaceholderObject.transform.Find("CurrentWeapon").gameObject;  
+            if (childObject != null)
+            {
+                Destroy(childObject);
+                GameObject weaponInstance = Instantiate(AssaultRifle, WeaponPlaceholderObject.transform);
+                weaponInstance.name = "CurrentWeapon";
+                weaponInstance.transform.localPosition = Vector3.zero;
+            }
+        }
+    }
+
+    private void FppMovement()
     {
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);

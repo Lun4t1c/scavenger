@@ -14,6 +14,8 @@ public class AssaultRifleScript : WeaponBase
         TotalAmmo = 360;
         MaxTotalAmmo = 360;
         ImpactForce = 400f;
+        FireRate = .1f;
+        Range = 150f;
 
         base.Start();
     }

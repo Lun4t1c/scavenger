@@ -12,9 +12,9 @@ public abstract class WeaponBase : MonoBehaviour
     public ushort TotalAmmo;
     public ushort MaxTotalAmmo;
     public float ImpactForce;
+    public float FireRate;
+    public float Range;
 
-    public float FireRate = .25f;
-    public float Range = 50f;
     public Transform GunEnd;
 
     public AudioSource Audio;
