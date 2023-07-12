@@ -21,8 +21,12 @@ public class PistolScript : WeaponBase
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        base.Update();
+        if (Input.GetMouseButtonDown(0))
+            Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            Reload();
     }
 }

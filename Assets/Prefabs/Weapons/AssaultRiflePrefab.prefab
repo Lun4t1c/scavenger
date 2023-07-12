@@ -138,7 +138,7 @@ MonoBehaviour:
   Range: 50
   GunEnd: {fileID: 2390756249008149299}
   Audio: {fileID: 0}
-  ShotSfx: {fileID: 8300000, guid: 100f5658070bef24089acc0e370fa827, type: 3}
+  ShotSfx: {fileID: 8300000, guid: 730eabafbe4473044a942e8436f9c566, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 95df64bcb3f3ccf48bbe1129d9594948, type: 3}
 --- !u!82 &-8441932729061267907
 AudioSource:

@@ -39,14 +39,7 @@ public abstract class WeaponBase : MonoBehaviour
         NotifyTotalAmmoUpdate();
     }
 
-    protected void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-            Shoot();
-
-        if (Input.GetKeyDown(KeyCode.R))
-            Reload();
-    }
+    protected abstract void Update();
 
     protected virtual void Shoot()
     {

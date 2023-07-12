@@ -21,8 +21,12 @@ public class AssaultRifleScript : WeaponBase
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        base.Update();
+        if (Input.GetMouseButton(0))
+            Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            Reload();
     }
 }
