@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public abstract class EnemyBase : MonoBehaviour
 {
     private NavMeshAgent agent;
-    public GameObject target;
+    public GameObject targetObject;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +27,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void MoveToTarget()
     {
-        agent.SetDestination(target.transform.position);
+        agent.SetDestination(targetObject.transform.position);
+    }
+
+    protected void RotateToTarget()
+    {
+        transform.LookAt(targetObject.transform);
     }
 }
