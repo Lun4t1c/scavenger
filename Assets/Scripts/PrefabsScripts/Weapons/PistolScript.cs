@@ -16,6 +16,7 @@ public class PistolScript : WeaponBase
         ImpactForce = 100f;
         FireRate = .1f;
         Range = 50f;
+        ReloadDuration = 1;
 
         base.Start();
     }
@@ -27,6 +28,6 @@ public class PistolScript : WeaponBase
             Shoot();
 
         if (Input.GetKeyDown(KeyCode.R))
-            Reload();
+            StartReload();
     }
 }

@@ -16,6 +16,7 @@ public class AssaultRifleScript : WeaponBase
         ImpactForce = 400f;
         FireRate = .1f;
         Range = 150f;
+        ReloadDuration = 3;
 
         base.Start();
     }
@@ -27,6 +28,6 @@ public class AssaultRifleScript : WeaponBase
             Shoot();
 
         if (Input.GetKeyDown(KeyCode.R))
-            Reload();
+            StartReload();
     }
 }

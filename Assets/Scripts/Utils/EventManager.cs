@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    public delegate void GenericGameEvent();
     public delegate void TextUpdateEvent(string text);
     public delegate void WeaponChangeEvent(WeaponBase weapon);
 

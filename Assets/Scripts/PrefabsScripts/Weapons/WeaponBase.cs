@@ -14,6 +14,7 @@ public abstract class WeaponBase : MonoBehaviour
     public float ImpactForce;
     public float FireRate;
     public float Range;
+    public float ReloadDuration;
 
     public Transform GunEnd;
 
@@ -24,6 +25,8 @@ public abstract class WeaponBase : MonoBehaviour
     private Camera PlayerCamera;
     private WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
     private float NextFire;
+
+    private bool isReloading = false;
 
     protected void Start()
     {
@@ -44,7 +47,8 @@ public abstract class WeaponBase : MonoBehaviour
     protected virtual void Shoot()
     {
         if (BulletsInMag > 0
-            && Time.time > NextFire)
+            && Time.time > NextFire
+            && !isReloading)
         {
             NextFire = Time.time + FireRate;
 
@@ -65,23 +69,26 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
-    protected void Reload()
+    protected void StartReload()
     {
+        if (BulletsInMag == MagCapacity || isReloading) return;
+        isReloading = true;
+
+        WeaponPlaceholderScript.OnReloadStart?.Invoke();
+
         Audio.PlayOneShot(ReloadSfx, 0.7f);
+        Invoke("StopReload", ReloadDuration);   
+    }
+
+    protected void StopReload()
+    {
+        WeaponPlaceholderScript.OnReloadStop?.Invoke();
+
         TotalAmmo -= (ushort)(MagCapacity - BulletsInMag);
         BulletsInMag = MagCapacity;
         NotifyCurrentAmmoUpdate();
         NotifyTotalAmmoUpdate();
-    }
-
-    protected void NotifyCurrentAmmoUpdate()
-    {
-        EventManager.OnCurrentAmmoUpdate?.Invoke($"{this.BulletsInMag}/{this.MagCapacity}");
-    }
-
-    protected void NotifyTotalAmmoUpdate()
-    {
-        EventManager.OnTotalAmmoUpdate?.Invoke(TotalAmmo.ToString());
+        isReloading = false;
     }
 
     protected IEnumerator ShotEffect()
@@ -90,4 +97,10 @@ public abstract class WeaponBase : MonoBehaviour
 
         yield return ShotDuration;
     }
+
+    protected void NotifyCurrentAmmoUpdate() =>
+        EventManager.OnCurrentAmmoUpdate?.Invoke($"{this.BulletsInMag}/{this.MagCapacity}");
+
+    protected void NotifyTotalAmmoUpdate() => 
+        EventManager.OnTotalAmmoUpdate?.Invoke(TotalAmmo.ToString());
 }
