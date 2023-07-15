@@ -12,6 +12,22 @@ public class WeaponCollectible : CollectibleBase
     void Start()
     {
         base.Start();
+        ApplyChild3dModel();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        base.Update();
+    }
+
+    protected override void Collect()
+    {
+        base.Collect();
+    }
+
+    protected void ApplyChild3dModel()
+    {
         meshFilter = GetComponent<MeshFilter>();
 
         MeshFilter childMeshFilter = WeaponObject.GetComponent<MeshFilter>();
@@ -25,25 +41,8 @@ public class WeaponCollectible : CollectibleBase
             Renderer parentRenderer = GetComponent<Renderer>();
             if (parentRenderer != null)
                 parentRenderer.sharedMaterial = childMaterial;
-            else
-            {
-                Debug.LogError("Renderer component not found on the parent object.");
-            }
+            else Debug.LogError("Renderer component not found on the parent object.");
         }
-        else
-        {
-            Debug.LogError("MeshFilter component not found on the child prefab object.");
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
-    }
-
-    protected override void Collect()
-    {
-        base.Collect();
+        else Debug.LogError("MeshFilter component not found on the child prefab object.");
     }
 }

@@ -21,13 +21,6 @@ public class WeaponPlaceholderScript : MonoBehaviour
         
     }
 
-    void StartReloading()
-    {
-        animator.SetTrigger("ReloadStarted");
-    }
-
-    void StopReloading()
-    {
-        animator.SetTrigger("ReloadStopped");
-    }
+    void StartReloading() => animator.SetTrigger("ReloadStarted");
+    void StopReloading() => animator.SetTrigger("ReloadStopped");
 }

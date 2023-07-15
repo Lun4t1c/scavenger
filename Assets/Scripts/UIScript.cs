@@ -22,19 +22,12 @@ public class UIScript : MonoBehaviour
         
     }
 
-    public void UpdateCurrentAmmoText(string newText)
-    {
-        CurrentAmmoText.text = newText;
-    }
-
-    public void UpdateTotalAmmoText(string newText)
-    {
-        TotalAmmoText.text = newText;
-    }
-
     public void WeaponChange(WeaponBase newWeapon)
     {
         UpdateCurrentAmmoText($"{newWeapon.BulletsInMag}/{newWeapon.MagCapacity}");
         UpdateTotalAmmoText(newWeapon.TotalAmmo.ToString());
     }
+
+    public void UpdateCurrentAmmoText(string newText) => CurrentAmmoText.text = newText;
+    public void UpdateTotalAmmoText(string newText) => TotalAmmoText.text = newText;
 }

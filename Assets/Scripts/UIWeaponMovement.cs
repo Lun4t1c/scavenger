@@ -17,15 +17,6 @@ public class UIWeaponMovement : MonoBehaviour
 
     private void Update()
     {
-        if (shouldMove)
-        {
-            float z = initialPosition.z + Mathf.Sin(Time.time * speed) * amplitude;
-            transform.position = new Vector3(transform.position.x, transform.position.y, z);
-        }
-        else
-        {
-            // Return to initial position
-            transform.position = initialPosition;
-        }
+        
     }
 }

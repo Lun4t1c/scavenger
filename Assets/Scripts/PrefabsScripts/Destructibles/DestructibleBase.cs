@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestructibleBase : MonoBehaviour
 {
+    public int currentHealth = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +18,10 @@ public class DestructibleBase : MonoBehaviour
         
     }
 
-    //The box's current health point total
-    public int currentHealth = 3;
-
     public void Damage(int damageAmount)
     {
-        //subtract damage amount when Damage function is called
         currentHealth -= damageAmount;
-
-        //Check if health has fallen below zero
-        if (currentHealth <= 0) 
-        {
-            //if health has fallen below zero, deactivate it 
+        if (currentHealth <= 0)
             gameObject.SetActive (false);
-        }
     }
 }

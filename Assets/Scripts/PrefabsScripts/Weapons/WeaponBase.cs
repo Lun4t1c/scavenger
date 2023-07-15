@@ -94,7 +94,6 @@ public abstract class WeaponBase : MonoBehaviour
     protected IEnumerator ShotEffect()
     {
         Audio.PlayOneShot(ShotSfx, 0.7f);
-
         yield return ShotDuration;
     }
 
