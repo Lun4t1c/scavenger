@@ -76,12 +76,12 @@ public abstract class WeaponBase : MonoBehaviour
 
         WeaponPlaceholderScript.OnReloadStart?.Invoke();
 
-        Audio.PlayOneShot(ReloadSfx, 0.7f);
         Invoke("StopReload", ReloadDuration);   
     }
 
     protected void StopReload()
     {
+        Audio.PlayOneShot(ReloadSfx, 0.7f);
         WeaponPlaceholderScript.OnReloadStop?.Invoke();
 
         TotalAmmo -= (ushort)(MagCapacity - BulletsInMag);

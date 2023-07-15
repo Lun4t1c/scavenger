@@ -16,7 +16,7 @@ public class PistolScript : WeaponBase
         ImpactForce = 100f;
         FireRate = .1f;
         Range = 50f;
-        ReloadDuration = 1;
+        ReloadDuration = 0.5f;
 
         base.Start();
     }
