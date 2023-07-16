@@ -5,7 +5,13 @@ using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    protected int MaxHealth;
+    protected int CurrentHealth;
+    protected int Damage;
+
+    protected bool IsDead = false;
+
+    protected NavMeshAgent agent;
     public GameObject targetObject;
 
     // Start is called before the first frame update
@@ -17,7 +23,7 @@ public abstract class EnemyBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToTarget();
+
     }
 
     protected void GetReferences()
@@ -25,13 +31,15 @@ public abstract class EnemyBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    protected void MoveToTarget()
+    protected virtual void ApplyDamage(int amount)
     {
-        agent.SetDestination(targetObject.transform.position);
+        CurrentHealth -= amount;
+        if (CurrentHealth <= 0)
+            Kill();
     }
 
-    protected void RotateToTarget()
+    protected virtual void Kill()
     {
-        transform.LookAt(targetObject.transform);
+        IsDead = true;
     }
 }
