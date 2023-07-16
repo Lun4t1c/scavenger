@@ -37,6 +37,6 @@ public abstract class CollectibleBase : MonoBehaviour
 
     protected virtual void Collect()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
