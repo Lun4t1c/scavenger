@@ -96,15 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c59e52a04528334c8bfa7b88cc5a818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletsInMag: 0
+  BulletsInMag: 15
   Damage: 0
-  MagCapacity: 0
+  MagCapacity: 15
   ShootCooldown: 0
   TotalAmmo: 0
   MaxTotalAmmo: 0
   ImpactForce: 100
   FireRate: 0.25
   Range: 50
+  ReloadDuration: 0
   GunEnd: {fileID: 0}
   Audio: {fileID: 0}
   ShotSfx: {fileID: 8300000, guid: 100f5658070bef24089acc0e370fa827, type: 3}

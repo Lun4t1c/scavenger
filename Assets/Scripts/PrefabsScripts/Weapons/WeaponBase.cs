@@ -98,10 +98,13 @@ public abstract class WeaponBase : MonoBehaviour
     public void AddAmmo(ushort amount)
     {
         if (TotalAmmo == MaxTotalAmmo) return;
+        Debug.Log($"Adding - {TotalAmmo} + {amount}");
 
         TotalAmmo += amount;
         if (TotalAmmo > MaxTotalAmmo) 
             TotalAmmo = MaxTotalAmmo;
+
+        NotifyTotalAmmoUpdate();
     }
 
     protected IEnumerator ShotEffect()
