@@ -103,7 +103,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (TotalAmmo > MaxTotalAmmo) 
             TotalAmmo = MaxTotalAmmo;
 
-        NotifyTotalAmmoUpdate();
+        if (gameObject.active) NotifyTotalAmmoUpdate();
     }
 
     protected IEnumerator ShotEffect()
