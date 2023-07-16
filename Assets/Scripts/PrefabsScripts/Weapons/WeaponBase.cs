@@ -50,6 +50,12 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected virtual void Shoot()
     {
+        if (BulletsInMag == 0)
+        {
+            StartReload();
+            return;
+        }
+
         if (BulletsInMag > 0
             && Time.time > NextFire
             && !isReloading)
