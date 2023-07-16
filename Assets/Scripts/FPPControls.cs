@@ -15,8 +15,8 @@ public class FPPControls : MonoBehaviour
     public float lookXLimit = 45.0f;
 
     public GameObject WeaponPlaceholderObject;
-    public GameObject Pistol;
-    public GameObject AssaultRifle;
+    public GameObject[] WeaponsReel;
+    public GameObject InitialWeaponPrefab;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -28,6 +28,10 @@ public class FPPControls : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        WeaponsReel = new GameObject[System.Enum.GetValues(typeof(GameEnums.WeaponsEnum)).Length];
+        WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol] = Instantiate(InitialWeaponPrefab, WeaponPlaceholderObject.transform);
+        WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].name = "CurrentWeapon";
+        WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].transform.localPosition = Vector3.zero;
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -37,34 +41,26 @@ public class FPPControls : MonoBehaviour
     void Update()
     {
         FppMovement();
-        WeaponSwitch();
+        WeaponSwitchInput();
     }
 
-    private void WeaponSwitch()
+    private void WeaponSwitchInput()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            GameObject childObject = WeaponPlaceholderObject.transform.Find("CurrentWeapon").gameObject;  
-            if (childObject != null)
-            {
-                Destroy(childObject);
-                GameObject weaponInstance = Instantiate(Pistol, WeaponPlaceholderObject.transform);
-                weaponInstance.name = "CurrentWeapon";
-                weaponInstance.transform.localPosition = Vector3.zero;
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SwitchToWeapon(GameEnums.WeaponsEnum.Pistol);
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SwitchToWeapon(GameEnums.WeaponsEnum.AssaultRifle);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            GameObject childObject = WeaponPlaceholderObject.transform.Find("CurrentWeapon").gameObject;  
-            if (childObject != null)
-            {
-                Destroy(childObject);
-                GameObject weaponInstance = Instantiate(AssaultRifle, WeaponPlaceholderObject.transform);
-                weaponInstance.name = "CurrentWeapon";
-                weaponInstance.transform.localPosition = Vector3.zero;
-            }
-        }
+    private void SwitchToWeapon(GameEnums.WeaponsEnum weapon)
+    {
+        if (WeaponsReel[(int)weapon] == null) return;
+
+        foreach(GameObject weaponObject in WeaponsReel)
+            weaponObject?.SetActive(false);
+
+        WeaponsReel[(int)weapon]?.SetActive(true);
     }
 
     private void FppMovement()

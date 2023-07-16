@@ -30,10 +30,14 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected void Start()
     {
+        GetReferences();
+        BulletsInMag = MagCapacity;
+    }
+
+    protected void GetReferences()
+    {
         Audio = GetComponent<AudioSource>();
         PlayerCamera = GetComponentInParent<Camera>();
-        
-        BulletsInMag = MagCapacity;
     }
 
     void OnEnable()

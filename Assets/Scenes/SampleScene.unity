@@ -161,8 +161,8 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   WeaponPlaceholderObject: {fileID: 416292210}
-  Pistol: {fileID: 6885575335863273254, guid: d04b3918b5df3af41bbfe11823a7224f, type: 3}
-  AssaultRifle: {fileID: 785290413649739480, guid: 5e9fc84d19f5347479c6064f63ad2830, type: 3}
+  WeaponsReel: []
+  InitialWeaponPrefab: {fileID: 6885575335863273254, guid: d04b3918b5df3af41bbfe11823a7224f, type: 3}
   canMove: 1
 --- !u!4 &263379285
 Transform:
