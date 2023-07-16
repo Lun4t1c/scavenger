@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         WeaponsReel = new GameObject[System.Enum.GetValues(typeof(GameEnums.WeaponsEnum)).Length];
         WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol] = Instantiate(InitialWeaponPrefab, WeaponPlaceholderObject.transform);
-        WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].name = "CurrentWeapon";
         WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].transform.localPosition = Vector3.zero;
+        SwitchToWeapon(GameEnums.WeaponsEnum.Pistol);
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SwitchToWeapon(GameEnums.WeaponsEnum.Pistol);
-        
+
         if (Input.GetKeyDown(KeyCode.Alpha2))
             SwitchToWeapon(GameEnums.WeaponsEnum.AssaultRifle);
     }
@@ -57,8 +57,7 @@ public class Player : MonoBehaviour
     {
         if (WeaponsReel[(int)weapon] == null) return;
 
-        foreach(GameObject weaponObject in WeaponsReel)
-            weaponObject?.SetActive(false);
+        DeactivateAllWeapons();
 
         WeaponsReel[(int)weapon]?.SetActive(true);
     }
@@ -122,6 +121,30 @@ public class Player : MonoBehaviour
             case PistolScript pistolScript:
                 WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].GetComponent<WeaponBase>().AddAmmo(pistolScript.MagCapacity);
                 break;
+
+            case AssaultRifleScript assaultRifleScript:
+                if (WeaponsReel[(int)GameEnums.WeaponsEnum.AssaultRifle] == null)
+                {
+                    DeactivateAllWeapons();
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.AssaultRifle] = Instantiate(weaponCollectible.WeaponPrefabHandle, WeaponPlaceholderObject.transform);
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.AssaultRifle].transform.localPosition = Vector3.zero;
+                    SwitchToWeapon(GameEnums.WeaponsEnum.AssaultRifle);
+                }
+                else
+                {
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.AssaultRifle]
+                        .GetComponent<WeaponBase>()
+                        .AddAmmo(assaultRifleScript.MagCapacity);
+                }
+                break;
         }
     }
+
+    #region Helpers
+    private void DeactivateAllWeapons()
+    {
+        foreach (GameObject weaponObject in WeaponsReel)
+            weaponObject?.SetActive(false);
+    }
+    #endregion
 }

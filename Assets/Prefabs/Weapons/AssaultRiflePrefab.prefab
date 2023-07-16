@@ -129,13 +129,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletsInMag: 0
   Damage: 0
-  MagCapacity: 0
+  MagCapacity: 30
   ShootCooldown: 0
   TotalAmmo: 0
   MaxTotalAmmo: 0
   ImpactForce: 0
   FireRate: 0.25
   Range: 50
+  ReloadDuration: 0
   GunEnd: {fileID: 2390756249008149299}
   Audio: {fileID: 0}
   ShotSfx: {fileID: 8300000, guid: 730eabafbe4473044a942e8436f9c566, type: 3}

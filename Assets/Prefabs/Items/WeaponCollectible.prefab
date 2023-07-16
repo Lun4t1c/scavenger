@@ -122,4 +122,5 @@ MonoBehaviour:
   amplitude: 0.25
   frequency: 6
   speed: 30
-  WeaponObject: {fileID: 6885575335863273254, guid: d04b3918b5df3af41bbfe11823a7224f, type: 3}
+  WeaponPrefabHandle: {fileID: 0}
+  WeaponObject: {fileID: 0}

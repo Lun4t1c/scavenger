@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponCollectible : CollectibleBase
 {
+    public GameObject WeaponPrefabHandle;
     public GameObject WeaponObject;
 
     private MeshFilter meshFilter;
@@ -11,6 +12,8 @@ public class WeaponCollectible : CollectibleBase
     // Start is called before the first frame update
     void Start()
     {
+        WeaponObject = Instantiate(WeaponPrefabHandle);
+        WeaponObject.SetActive(false);
         base.Start();
         ApplyChild3dModel();
     }
@@ -23,7 +26,6 @@ public class WeaponCollectible : CollectibleBase
 
     protected override void Collect(Collider playerCollider)
     {
-        Debug.Log("Wapon is collected");
         playerCollider.gameObject.GetComponentInParent<Player>().TakeCollectible(this);
         base.Collect(playerCollider);
     }

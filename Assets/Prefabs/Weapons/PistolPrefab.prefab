@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c59e52a04528334c8bfa7b88cc5a818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletsInMag: 15
+  BulletsInMag: 0
   Damage: 0
   MagCapacity: 15
   ShootCooldown: 0
