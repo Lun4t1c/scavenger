@@ -81,11 +81,10 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected void StartReload()
     {
-        EventManager.OnReloadStart?.Invoke(ReloadDuration);
-
         if (BulletsInMag == MagCapacity || isReloading) return;
-        isReloading = true;
 
+        EventManager.OnReloadStart?.Invoke(ReloadDuration);
+        isReloading = true;
         WeaponPlaceholderScript.OnReloadStart?.Invoke();
 
         Invoke("StopReload", ReloadDuration);   
