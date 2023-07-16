@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class FPPControls : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
@@ -102,6 +102,26 @@ public class FPPControls : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+    }
+
+    public void TakeCollectible(CollectibleBase collectible)
+    {
+        switch (collectible)
+        {
+            case WeaponCollectible weaponCollectible:
+                TakeWeaponCollectible(collectible as WeaponCollectible);
+                break;
+        }
+    }
+
+    public void TakeWeaponCollectible(WeaponCollectible weaponCollectible)
+    {
+        switch (weaponCollectible.WeaponObject.GetComponent<WeaponBase>())
+        {
+            case PistolScript pistolScript:
+                WeaponsReel[(int)GameEnums.WeaponsEnum.Pistol].GetComponent<WeaponBase>().AddAmmo(pistolScript.MagCapacity);
+                break;
         }
     }
 }

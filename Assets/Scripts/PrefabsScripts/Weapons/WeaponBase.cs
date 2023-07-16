@@ -95,6 +95,15 @@ public abstract class WeaponBase : MonoBehaviour
         isReloading = false;
     }
 
+    public void AddAmmo(ushort amount)
+    {
+        if (TotalAmmo == MaxTotalAmmo) return;
+
+        TotalAmmo += amount;
+        if (TotalAmmo > MaxTotalAmmo) 
+            TotalAmmo = MaxTotalAmmo;
+    }
+
     protected IEnumerator ShotEffect()
     {
         Audio.PlayOneShot(ShotSfx, 0.7f);

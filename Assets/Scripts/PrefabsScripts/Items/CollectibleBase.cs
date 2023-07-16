@@ -32,10 +32,10 @@ public abstract class CollectibleBase : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            Collect();
+            Collect(other);
     }
 
-    protected virtual void Collect()
+    protected virtual void Collect(Collider playerCollider)
     {
         Destroy(gameObject);
     }

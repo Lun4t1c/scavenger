@@ -21,9 +21,11 @@ public class WeaponCollectible : CollectibleBase
         base.Update();
     }
 
-    protected override void Collect()
+    protected override void Collect(Collider playerCollider)
     {
-        base.Collect();
+        Debug.Log("Wapon is collected");
+        playerCollider.gameObject.GetComponentInParent<Player>().TakeCollectible(this);
+        base.Collect(playerCollider);
     }
 
     protected void ApplyChild3dModel()
