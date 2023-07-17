@@ -9,6 +9,7 @@ public class UIScript : MonoBehaviour
     public TMP_Text CurrentAmmoText;
     public TMP_Text TotalAmmoText;
     public Image ReloadProgressImage;
+    public Image InteractableImage;
 
     private float _startingProgressarXScale = 0.3f;
     private Coroutine fillCoroutine;
@@ -20,6 +21,8 @@ public class UIScript : MonoBehaviour
         EventManager.OnCurrentAmmoUpdate += UpdateCurrentAmmoText;
         EventManager.OnTotalAmmoUpdate += UpdateTotalAmmoText;
         EventManager.OnReloadStart += StartReload;
+        EventManager.OnInteractableFocus += InteractableFocus;
+        EventManager.OnInteractableUnfocus += InteractableUnfocus;
     }
 
     // Update is called once per frame
@@ -37,9 +40,8 @@ public class UIScript : MonoBehaviour
     public void StartReload(float seconds)
     {
         if (fillCoroutine != null)
-        {
             StopCoroutine(fillCoroutine);
-        }
+
         fillCoroutine = StartCoroutine(FillProgressBar(seconds));
     }
 
@@ -59,6 +61,9 @@ public class UIScript : MonoBehaviour
 
         ReloadProgressImage.transform.localScale = targetScale;
     }
+
+    public void InteractableFocus() => InteractableImage.enabled = true;
+    public void InteractableUnfocus() => InteractableImage.enabled = false;
 
     public void UpdateCurrentAmmoText(string newText) => CurrentAmmoText.text = newText;
     public void UpdateTotalAmmoText(string newText) => TotalAmmoText.text = newText;    

@@ -13,7 +13,8 @@ public class EventManager : MonoBehaviour
     public static TextUpdateEvent OnTotalAmmoUpdate;
     public static WeaponChangeEvent OnWeaponChange;
     public static TimedEvent OnReloadStart;
-    
+    public static GenericGameEvent OnInteractableFocus;
+    public static GenericGameEvent OnInteractableUnfocus;
 
     // Start is called before the first frame update
     void Start()

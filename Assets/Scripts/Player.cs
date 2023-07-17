@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    private float interactionRange = 3f;
+
     public GameObject WeaponPlaceholderObject;
     public GameObject[] WeaponsReel;
     public GameObject InitialWeaponPrefab;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+    private bool IsFocusedOnInteractable = false;
 
     void Start()
     {
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
         FppMovement();
         CheckInput();
         WeaponSwitchInput();
+        CheckInteractableFocus();
     }
 
     private void WeaponSwitchInput()
@@ -156,17 +160,30 @@ public class Player : MonoBehaviour
     private void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {
             CheckInteractions();
-        }
     }
 
     private void CheckInteractions()
     {
-        float interactionRange = 3f;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
             hit.collider.GetComponent<IInteractable>()?.Interact();
+    }
+
+    private void CheckInteractableFocus()
+    {
+        RaycastHit hit;
+        if (!IsFocusedOnInteractable && Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
+        {
+            EventManager.OnInteractableFocus?.Invoke();
+            IsFocusedOnInteractable = !IsFocusedOnInteractable;
+        }
+
+        if (IsFocusedOnInteractable && !Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
+        {
+            EventManager.OnInteractableUnfocus?.Invoke();
+            IsFocusedOnInteractable = !IsFocusedOnInteractable;
+        }
     }
     #endregion
 }
