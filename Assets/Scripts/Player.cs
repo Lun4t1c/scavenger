@@ -173,8 +173,10 @@ public class Player : MonoBehaviour
     private void CheckInteractableFocus()
     {
         RaycastHit hit;
+
         if (!IsFocusedOnInteractable && Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
         {
+            if (hit.collider.GetComponent<IInteractable>() == null) return;
             EventManager.OnInteractableFocus?.Invoke();
             IsFocusedOnInteractable = !IsFocusedOnInteractable;
         }

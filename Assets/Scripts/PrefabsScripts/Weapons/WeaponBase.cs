@@ -69,8 +69,8 @@ public abstract class WeaponBase : MonoBehaviour
 
             if (Physics.Raycast(rayOrigin, PlayerCamera.transform.forward, out raycastHit, Range))
             {
-                DestructibleBase destructible = raycastHit.collider.GetComponent<DestructibleBase>();
-                destructible?.Damage(Damage);
+                IDamagable damagable = raycastHit.collider.GetComponent<IDamagable>();
+                damagable?.ApplyDamage(Damage);
                 raycastHit.rigidbody?.AddForce(-raycastHit.normal * ImpactForce);
             }
 

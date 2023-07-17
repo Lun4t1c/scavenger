@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour, IDamagable
 {
-    protected int MaxHealth;
-    protected int CurrentHealth;
-    protected int Damage;
+    protected int MaxHealth = 8;
+    protected int CurrentHealth = 8;
+    protected int Damage = 5;
     protected float AttackSpeed = 1.5f;
 
     protected bool IsDead = false;
@@ -35,7 +35,7 @@ public abstract class EnemyBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    protected virtual void ApplyDamage(int amount)
+    public virtual void ApplyDamage(int amount)
     {
         CurrentHealth -= amount;
         if (CurrentHealth <= 0)
@@ -45,6 +45,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Kill()
     {
         IsDead = true;
+        Destroy(gameObject);
     }
 
     protected void MoveToTarget()

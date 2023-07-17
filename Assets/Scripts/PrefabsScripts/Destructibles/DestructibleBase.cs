@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleBase : MonoBehaviour
+public class DestructibleBase : MonoBehaviour, IDamagable
 {
     public int currentHealth = 3;
 
@@ -18,7 +18,7 @@ public class DestructibleBase : MonoBehaviour
         
     }
 
-    public void Damage(int damageAmount)
+    public void ApplyDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
         if (currentHealth <= 0)
