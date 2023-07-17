@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         FppMovement();
+        CheckInput();
         WeaponSwitchInput();
     }
 
@@ -145,6 +146,22 @@ public class Player : MonoBehaviour
     {
         foreach (GameObject weaponObject in WeaponsReel)
             weaponObject?.SetActive(false);
+    }
+
+    private void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            CheckInteractions();
+        }
+    }
+
+    private void CheckInteractions()
+    {
+        float interactionRange = 3f;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
+            hit.collider.GetComponent<IInteractable>()?.Interact();
     }
     #endregion
 }
