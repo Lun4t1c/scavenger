@@ -141,6 +141,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int amount)
+    {
+        Debug.Log($"Took Damage {amount}");
+    }
+
     #region Helpers
     private void DeactivateAllWeapons()
     {
