@@ -8,6 +8,7 @@ public class UIScript : MonoBehaviour
 {
     public TMP_Text CurrentAmmoText;
     public TMP_Text TotalAmmoText;
+    public TMP_Text HealthText;
     public Image ReloadProgressImage;
     public Image InteractableImage;
 
@@ -23,6 +24,7 @@ public class UIScript : MonoBehaviour
         EventManager.OnReloadStart += StartReload;
         EventManager.OnInteractableFocus += InteractableFocus;
         EventManager.OnInteractableUnfocus += InteractableUnfocus;
+        EventManager.OnHealthUpdate += UpdateHealthText;
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class UIScript : MonoBehaviour
     public void InteractableFocus() => InteractableImage.enabled = true;
     public void InteractableUnfocus() => InteractableImage.enabled = false;
 
+    public void UpdateHealthText(string newText) => HealthText.text = newText;
     public void UpdateCurrentAmmoText(string newText) => CurrentAmmoText.text = newText;
     public void UpdateTotalAmmoText(string newText) => TotalAmmoText.text = newText;    
 }

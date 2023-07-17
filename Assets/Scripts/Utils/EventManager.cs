@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
     public delegate void WeaponChangeEvent(WeaponBase weapon);
     public delegate void TimedEvent(float seconds);
 
+    public static TextUpdateEvent OnHealthUpdate;
     public static TextUpdateEvent OnCurrentAmmoUpdate;
     public static TextUpdateEvent OnTotalAmmoUpdate;
     public static WeaponChangeEvent OnWeaponChange;

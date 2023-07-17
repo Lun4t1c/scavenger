@@ -4,8 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
+    public int MaxHealth = 100;
+    public int CurrentHealth = 100;
+
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        EventManager.OnHealthUpdate?.Invoke(CurrentHealth.ToString());
     }
 
     void Update()
@@ -145,9 +149,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public void ApplyDamage(int amount)
     {
-        Debug.Log($"Took Damage {amount}");
+        CurrentHealth -= amount;
+        EventManager.OnHealthUpdate?.Invoke(CurrentHealth.ToString());
     }
 
     #region Helpers

@@ -60,7 +60,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
             {
                 timeOfLastAttack = Time.time;
                 Player player = targetObject.GetComponentInParent<Player>();
-                player?.TakeDamage(Damage);
+                player?.ApplyDamage(Damage);
             }
         }
     }
