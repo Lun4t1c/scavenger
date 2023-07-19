@@ -17,7 +17,7 @@ public class MainMenuStartButton : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    protected void OnMouseDown()
     {
         SceneManager.LoadScene("SampleScene");
     }
