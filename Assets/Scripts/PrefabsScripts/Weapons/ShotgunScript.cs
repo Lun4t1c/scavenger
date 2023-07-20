@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ShotgunScript : WeaponBase
 {
+    public AudioClip CockingSfx;
+    public AudioClip ShellLoadingSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +20,7 @@ public class ShotgunScript : WeaponBase
         ImpactForce = 400f;
         FireRate = 1f;
         Range = 100f;
-        ReloadDuration = .4f;
+        ReloadDuration = .6f;
 
         base.Start();
     }
@@ -29,5 +33,36 @@ public class ShotgunScript : WeaponBase
 
         if (Input.GetKeyDown(KeyCode.R))
             StartReload();
+    }
+
+    protected async override void StartReload()
+    {
+        if (BulletsInMag == MagCapacity || isReloading) return;
+        isReloading = true;
+
+        while (BulletsInMag < MagCapacity)
+        {
+            await LoadSingleShell();
+        }
+
+        Audio.PlayOneShot(CockingSfx, 0.7f);
+        isReloading = false;
+    }
+
+
+    private async Task LoadSingleShell()
+    {
+        EventManager.OnReloadStart?.Invoke(ReloadDuration);
+        WeaponPlaceholderScript.OnReloadStart?.Invoke();
+
+        await Task.Delay((int)(ReloadDuration * 1000));
+        Audio.PlayOneShot(ShellLoadingSfx, 0.7f);
+
+        TotalAmmo--;
+        BulletsInMag++;
+
+        WeaponPlaceholderScript.OnReloadStop?.Invoke();
+        NotifyCurrentAmmoUpdate();
+        NotifyTotalAmmoUpdate();
     }
 }

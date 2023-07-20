@@ -87,7 +87,7 @@ public abstract class WeaponBase : MonoBehaviour
         isReloading = true;
         WeaponPlaceholderScript.OnReloadStart?.Invoke();
 
-        Invoke("StopReload", ReloadDuration);   
+        Invoke("StopReload", ReloadDuration);
     }
 
     protected virtual void StopReload()
