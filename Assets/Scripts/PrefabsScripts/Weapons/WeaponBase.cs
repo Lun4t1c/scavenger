@@ -26,7 +26,7 @@ public abstract class WeaponBase : MonoBehaviour
     private WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
     private float NextFire;
 
-    private bool isReloading = false;
+    protected bool isReloading = false;
 
     protected void Start()
     {
@@ -79,7 +79,7 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
-    protected void StartReload()
+    protected virtual void StartReload()
     {
         if (BulletsInMag == MagCapacity || isReloading) return;
 
@@ -90,7 +90,7 @@ public abstract class WeaponBase : MonoBehaviour
         Invoke("StopReload", ReloadDuration);   
     }
 
-    protected void StopReload()
+    protected virtual void StopReload()
     {
         Audio.PlayOneShot(ReloadSfx, 0.7f);
         WeaponPlaceholderScript.OnReloadStop?.Invoke();

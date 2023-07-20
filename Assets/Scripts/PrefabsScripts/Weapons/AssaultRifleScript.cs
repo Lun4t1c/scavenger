@@ -16,7 +16,7 @@ public class AssaultRifleScript : WeaponBase
         ImpactForce = 400f;
         FireRate = .1f;
         Range = 150f;
-        ReloadDuration = 2.5f;
+        ReloadDuration = 1.4f;
 
         base.Start();
     }
@@ -29,5 +29,28 @@ public class AssaultRifleScript : WeaponBase
 
         if (Input.GetKeyDown(KeyCode.R))
             StartReload();
+    }
+
+    protected override void StartReload()
+    {
+        if (BulletsInMag == MagCapacity || isReloading) return;
+
+        Audio.PlayOneShot(ReloadSfx, 0.7f);
+        EventManager.OnReloadStart?.Invoke(ReloadDuration);
+        isReloading = true;
+        WeaponPlaceholderScript.OnReloadStart?.Invoke();
+
+        Invoke("StopReload", ReloadDuration);   
+    }
+
+    protected override void StopReload()
+    {
+        WeaponPlaceholderScript.OnReloadStop?.Invoke();
+
+        TotalAmmo -= (ushort)(MagCapacity - BulletsInMag);
+        BulletsInMag = MagCapacity;
+        NotifyCurrentAmmoUpdate();
+        NotifyTotalAmmoUpdate();
+        isReloading = false;
     }
 }

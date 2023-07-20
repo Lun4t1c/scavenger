@@ -55,11 +55,15 @@ public class Player : MonoBehaviour, IDamagable
 
     private void WeaponSwitchInput()
     {
+        // TODO try and make this more modular
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SwitchToWeapon(GameEnums.WeaponsEnum.Pistol);
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
             SwitchToWeapon(GameEnums.WeaponsEnum.AssaultRifle);
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SwitchToWeapon(GameEnums.WeaponsEnum.Shotgun);
     }
 
     private void SwitchToWeapon(GameEnums.WeaponsEnum weapon)
@@ -125,6 +129,7 @@ public class Player : MonoBehaviour, IDamagable
 
     public void TakeWeaponCollectible(WeaponCollectible weaponCollectible)
     {
+        // TODO possibly simplify this switch
         switch (weaponCollectible.WeaponObject.GetComponent<WeaponBase>())
         {
             case PistolScript pistolScript:
@@ -144,6 +149,22 @@ public class Player : MonoBehaviour, IDamagable
                     WeaponsReel[(int)GameEnums.WeaponsEnum.AssaultRifle]
                         .GetComponent<WeaponBase>()
                         .AddAmmo(assaultRifleScript.MagCapacity);
+                }
+                break;
+
+            case ShotgunScript shotgunScript:
+                if (WeaponsReel[(int)GameEnums.WeaponsEnum.Shotgun] == null)
+                {
+                    DeactivateAllWeapons();
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.Shotgun] = Instantiate(weaponCollectible.WeaponPrefabHandle, WeaponPlaceholderObject.transform);
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.Shotgun].transform.localPosition = Vector3.zero;
+                    SwitchToWeapon(GameEnums.WeaponsEnum.Shotgun);
+                }
+                else
+                {
+                    WeaponsReel[(int)GameEnums.WeaponsEnum.Shotgun]
+                        .GetComponent<WeaponBase>()
+                        .AddAmmo(shotgunScript.MagCapacity);
                 }
                 break;
         }
