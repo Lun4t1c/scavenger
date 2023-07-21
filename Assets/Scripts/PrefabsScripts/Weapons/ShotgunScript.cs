@@ -38,6 +38,7 @@ public class ShotgunScript : WeaponBase
     protected async override void StartReload()
     {
         if (BulletsInMag == MagCapacity || isReloading) return;
+        bool hasStartedFromZero = BulletsInMag == 0;
         isReloading = true;
 
         while (BulletsInMag < MagCapacity)
@@ -45,7 +46,7 @@ public class ShotgunScript : WeaponBase
             await LoadSingleShell();
         }
 
-        Audio.PlayOneShot(CockingSfx, 0.7f);
+        if (hasStartedFromZero) Audio.PlayOneShot(CockingSfx, 0.7f);
         isReloading = false;
     }
 
