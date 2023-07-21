@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5566763046824145353}
   - component: {fileID: 9215747653853756863}
   - component: {fileID: 9128335904328424174}
-  - component: {fileID: 1333611545183906497}
+  - component: {fileID: 475245941049368798}
   m_Layer: 0
-  m_Name: Crate
+  m_Name: RandomisedCratePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1333611545183906497
+--- !u!114 &475245941049368798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 698123747582439653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e458d82f0ef91ed408ea6be27010dcfb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d8eb65d1c2ccc046a9c3b69974c6589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 3
+  DropObjectPrefabs:
+  - {fileID: 1941704423543505159, guid: 4bf5198cde5551241a17fcccc5bafac8, type: 3}

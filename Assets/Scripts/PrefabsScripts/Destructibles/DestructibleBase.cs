@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DestructibleBase : MonoBehaviour, IDamagable
 {
-    public int currentHealth = 3;
+    public int currentHealth;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
@@ -22,6 +22,11 @@ public class DestructibleBase : MonoBehaviour, IDamagable
     {
         currentHealth -= damageAmount;
         if (currentHealth <= 0)
-            gameObject.SetActive (false);
+            DestroyDesctructible();
+    }
+
+    protected virtual void DestroyDesctructible()
+    {
+        Destroy(gameObject);
     }
 }
