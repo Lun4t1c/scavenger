@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IDamagable
     public GameObject WeaponPlaceholderObject;
     public GameObject[] WeaponsReel;
     public GameObject InitialWeaponPrefab;
+    public GameObject Flashlight;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -187,6 +188,9 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (Input.GetKeyDown(KeyCode.E))
             CheckInteractions();
+
+        if (Input.GetKeyDown(KeyCode.F))
+            Flashlight.SetActive(!Flashlight.activeSelf);
     }
 
     private void CheckInteractions()
