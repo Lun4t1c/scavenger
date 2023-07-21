@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour, IDamagable
 {
+    public AudioSource Audio;
+    public AudioClip[] DamagedSfxPool;
+
     protected int MaxHealth = 8;
     protected int CurrentHealth = 8;
     protected int Damage = 5;
@@ -33,6 +36,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
     protected void GetReferences()
     {
         agent = GetComponent<NavMeshAgent>();
+        Audio = GetComponent<AudioSource>();
     }
 
     public virtual void ApplyDamage(int amount)
@@ -40,6 +44,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
         CurrentHealth -= amount;
         if (CurrentHealth <= 0)
             Kill();
+        else 
+            Audio.PlayOneShot(DamagedSfxPool[Random.Range(0, DamagedSfxPool.Length - 1)], 0.7f);
     }
 
     protected virtual void Kill()
