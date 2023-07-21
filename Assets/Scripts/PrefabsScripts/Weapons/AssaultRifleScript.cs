@@ -13,11 +13,11 @@ public class AssaultRifleScript : WeaponBase
         ShootCooldown = 100;
         TotalAmmo = 360;
         MaxTotalAmmo = 360;
-        ImpactForce = 400f;
+        ImpactForce = 200f;
         FireRate = .1f;
         Range = 150f;
         ReloadDuration = 1.4f;
-        BulletSpreadAngle = 1.0f;
+        BulletSpreadAngle = 1.5f;
 
         base.Start();
     }

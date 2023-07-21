@@ -13,11 +13,11 @@ public class PistolScript : WeaponBase
         ShootCooldown = 100;
         TotalAmmo = 100;
         MaxTotalAmmo = 100;
-        ImpactForce = 100f;
+        ImpactForce = 150f;
         FireRate = .1f;
         Range = 50f;
         ReloadDuration = 0.5f;
-        BulletSpreadAngle = 1.0f;
+        BulletSpreadAngle = .7f;
 
         base.Start();
     }

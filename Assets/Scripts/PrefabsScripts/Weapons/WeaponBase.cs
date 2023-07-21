@@ -24,9 +24,9 @@ public abstract class WeaponBase : MonoBehaviour
     public AudioClip ReloadSfx;
     public GameObject BulletHolePrefab;
 
-    private Camera PlayerCamera;
-    private WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
-    private float NextFire;
+    protected Camera PlayerCamera;
+    protected WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
+    protected float NextFire;
 
     protected bool isReloading = false;
 
