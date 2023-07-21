@@ -141,6 +141,7 @@ MonoBehaviour:
   Audio: {fileID: 0}
   ShotSfx: {fileID: 8300000, guid: fb4484541a3d852479a7a16923d38ece, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 95df64bcb3f3ccf48bbe1129d9594948, type: 3}
+  BulletHolePrefab: {fileID: 6573571930162282417, guid: d9a014c42e3c68b41a87cc11c1010b81, type: 3}
   CockingSfx: {fileID: 8300000, guid: eb8bb68be0886f7448452f84c2b63ffe, type: 3}
   ShellLoadingSfx: {fileID: 8300000, guid: a8bd981277cbf5d429b09e1d55abc4e3, type: 3}
 --- !u!82 &-7701167599549424151

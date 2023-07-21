@@ -145,6 +145,7 @@ MonoBehaviour:
   Audio: {fileID: 0}
   ShotSfx: {fileID: 8300000, guid: 730eabafbe4473044a942e8436f9c566, type: 3}
   ReloadSfx: {fileID: 8300000, guid: e5301124a74275149b892bd3d5efdda7, type: 3}
+  BulletHolePrefab: {fileID: 6573571930162282417, guid: d9a014c42e3c68b41a87cc11c1010b81, type: 3}
 --- !u!82 &-8441932729061267907
 AudioSource:
   m_ObjectHideFlags: 0

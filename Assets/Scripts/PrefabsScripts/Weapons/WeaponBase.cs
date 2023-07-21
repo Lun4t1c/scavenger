@@ -21,6 +21,7 @@ public abstract class WeaponBase : MonoBehaviour
     public AudioSource Audio;
     public AudioClip ShotSfx;
     public AudioClip ReloadSfx;
+    public GameObject BulletHolePrefab;
 
     private Camera PlayerCamera;
     private WaitForSeconds ShotDuration = new WaitForSeconds(.07f);
@@ -72,6 +73,21 @@ public abstract class WeaponBase : MonoBehaviour
                 IDamagable damagable = raycastHit.collider.GetComponent<IDamagable>();
                 damagable?.ApplyDamage(Damage);
                 raycastHit.rigidbody?.AddForce(-raycastHit.normal * ImpactForce);
+
+                if (damagable == null)
+                {
+                    float offset = 0.01f; // Tweak this value as needed
+                    Vector3 spawnPosition = raycastHit.point + raycastHit.normal * offset;
+                    
+                    // Create the image GameObject
+                    GameObject imageGO = Instantiate(BulletHolePrefab, spawnPosition, Quaternion.identity);
+
+                    // Calculate the rotation to align the bullet hole with the hit surface
+                    Quaternion rotation = Quaternion.LookRotation(raycastHit.normal, Vector3.up);
+
+                    // Apply the rotation to the image GameObject
+                    imageGO.transform.rotation = rotation;
+                }
             }
 
             BulletsInMag--;
