@@ -21,6 +21,7 @@ public class ShotgunScript : WeaponBase
         FireRate = 1f;
         Range = 100f;
         ReloadDuration = .6f;
+        BulletSpreadAngle = 1.0f;
 
         base.Start();
     }

@@ -15,6 +15,7 @@ public abstract class WeaponBase : MonoBehaviour
     public float FireRate;
     public float Range;
     public float ReloadDuration;
+    public float BulletSpreadAngle;
 
     public Transform GunEnd;
 
@@ -66,9 +67,12 @@ public abstract class WeaponBase : MonoBehaviour
             StartCoroutine(ShotEffect());
 
             Vector3 rayOrigin = PlayerCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+            Vector3 spreadDirection = PlayerCamera.transform.forward;
+            spreadDirection = Quaternion.AngleAxis(Random.Range(-BulletSpreadAngle, BulletSpreadAngle), PlayerCamera.transform.up) * spreadDirection;
+            spreadDirection = Quaternion.AngleAxis(Random.Range(-BulletSpreadAngle, BulletSpreadAngle), PlayerCamera.transform.right) * spreadDirection;
             RaycastHit raycastHit;
 
-            if (Physics.Raycast(rayOrigin, PlayerCamera.transform.forward, out raycastHit, Range))
+            if (Physics.Raycast(rayOrigin, spreadDirection, out raycastHit, Range))
             {
                 IDamagable damagable = raycastHit.collider.GetComponent<IDamagable>();
                 damagable?.ApplyDamage(Damage);

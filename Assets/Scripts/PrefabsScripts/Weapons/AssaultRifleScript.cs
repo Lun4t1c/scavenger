@@ -17,6 +17,7 @@ public class AssaultRifleScript : WeaponBase
         FireRate = .1f;
         Range = 150f;
         ReloadDuration = 1.4f;
+        BulletSpreadAngle = 1.0f;
 
         base.Start();
     }

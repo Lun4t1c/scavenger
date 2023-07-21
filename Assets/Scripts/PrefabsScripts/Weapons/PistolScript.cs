@@ -17,6 +17,7 @@ public class PistolScript : WeaponBase
         FireRate = .1f;
         Range = 50f;
         ReloadDuration = 0.5f;
+        BulletSpreadAngle = 1.0f;
 
         base.Start();
     }
