@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour, IDamagable
 {
+    protected abstract void AttackTarget();
+
     public AudioSource Audio;
     public AudioClip[] DamagedSfxPool;
 
@@ -17,9 +19,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
 
     protected NavMeshAgent agent;
     public GameObject targetObject;
-    public float targetStoppingDistance = 2f;
 
-    private float timeOfLastAttack = 0;
+    protected float timeOfLastAttack = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -60,19 +61,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
         RotateToTarget();
 
         float distanceToTarget = Vector3.Distance(targetObject.transform.position, transform.position);
-        if (distanceToTarget <= agent.stoppingDistance) 
-        {
-            if (Time.time >= timeOfLastAttack + AttackSpeed)
-            {
-                timeOfLastAttack = Time.time;
-                Player player = targetObject.GetComponentInParent<Player>();
-                player?.ApplyDamage(Damage);
-            }
-        }
+        if (distanceToTarget <= agent.stoppingDistance)
+            AttackTarget();
     }
 
     protected void RotateToTarget()
     {
-        transform.LookAt(targetObject.transform);
+        Vector3 targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, targetObject.transform.position.z);
+        transform.LookAt(targetPosition);
     }
 }
