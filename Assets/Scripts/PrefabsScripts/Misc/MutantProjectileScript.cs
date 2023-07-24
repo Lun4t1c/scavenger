@@ -17,7 +17,6 @@ public class MutantProjectileScript : MonoBehaviour
     {
         // Move the projectile forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        Debug.Log("update proj");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,7 +24,7 @@ public class MutantProjectileScript : MonoBehaviour
         // Handle collision with other objects here (e.g., deal damage, apply effects)
         // For example, you could destroy the projectile when it hits something:
         if (collision.gameObject.tag == "Player") {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

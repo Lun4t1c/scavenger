@@ -18,11 +18,12 @@ public abstract class WeaponBase : MonoBehaviour
     public float BulletSpreadAngle;
 
     public Transform GunEnd;
+    public GameObject BulletHolePrefab;
+    public GameObject MuzzleFlashPrefab;
 
     public AudioSource Audio;
     public AudioClip ShotSfx;
     public AudioClip ReloadSfx;
-    public GameObject BulletHolePrefab;
 
     protected Camera PlayerCamera;
     protected WaitForSeconds ShotDuration = new WaitForSeconds(.07f);

@@ -55,6 +55,7 @@ public class ShotgunScript : WeaponBase
             NextFire = Time.time + FireRate;
 
             StartCoroutine(ShotEffect());
+            StartCoroutine(DisplayMuzzleFlashVfx());
 
             Vector3 rayOrigin = PlayerCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
             
@@ -93,6 +94,13 @@ public class ShotgunScript : WeaponBase
         }
     }
 
+    private IEnumerator DisplayMuzzleFlashVfx()
+    {
+        MuzzleFlashPrefab.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        MuzzleFlashPrefab.gameObject.SetActive(false);
+    }
+
     protected async override void StartReload()
     {
         if (BulletsInMag == MagCapacity || isReloading) return;
@@ -107,7 +115,6 @@ public class ShotgunScript : WeaponBase
         if (hasStartedFromZero) Audio.PlayOneShot(CockingSfx, 0.7f);
         isReloading = false;
     }
-
 
     private async Task LoadSingleShell()
     {

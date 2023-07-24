@@ -7,6 +7,16 @@ public class MutantScript : EnemyBase
     public GameObject projectilePrefab;
     public GameObject Mouth;
 
+    protected override void Start()
+    {
+        MaxHealth = 8;
+        CurrentHealth = 8;
+        Damage = 5;
+        AttackSpeed = 3.5f;
+
+        base.Start();
+    }
+
     protected override void AttackTarget()
     {
         if (Time.time >= timeOfLastAttack + AttackSpeed)

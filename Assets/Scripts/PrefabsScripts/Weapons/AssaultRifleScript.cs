@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AssaultRifleScript : WeaponBase
 {
+    private bool IsFiring = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,16 @@ public class AssaultRifleScript : WeaponBase
     // Update is called once per frame
     protected override void Update()
     {
+        if (Input.GetMouseButtonDown(0)) {
+            IsFiring = true;
+            MuzzleFlashPrefab.gameObject.SetActive(true);
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            IsFiring = false;
+            MuzzleFlashPrefab.gameObject.SetActive(false);
+        }
+
         if (Input.GetMouseButton(0))
             Shoot();
 

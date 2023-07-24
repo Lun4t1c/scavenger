@@ -10,10 +10,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
     public AudioSource Audio;
     public AudioClip[] DamagedSfxPool;
 
-    protected int MaxHealth = 8;
-    protected int CurrentHealth = 8;
-    protected int Damage = 5;
-    protected float AttackSpeed = 1.5f;
+    protected int MaxHealth;
+    protected int CurrentHealth;
+    protected int Damage;
+    protected float AttackSpeed;
 
     protected bool IsDead = false;
 
@@ -23,13 +23,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamagable
     protected float timeOfLastAttack = 0;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         GetReferences();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         MoveToTarget();
     }

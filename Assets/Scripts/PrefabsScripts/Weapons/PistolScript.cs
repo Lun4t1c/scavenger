@@ -31,4 +31,17 @@ public class PistolScript : WeaponBase
         if (Input.GetKeyDown(KeyCode.R))
             StartReload();
     }
+
+    protected override void Shoot()
+    {
+        StartCoroutine(DisplayMuzzleFlashVfx());
+        base.Shoot();
+    }
+
+    private IEnumerator DisplayMuzzleFlashVfx()
+    {
+        MuzzleFlashPrefab.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        MuzzleFlashPrefab.gameObject.SetActive(false);
+    }
 }
