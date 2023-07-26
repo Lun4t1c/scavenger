@@ -1,5 +1,8 @@
 # scavenger TODO
 
+### Important
+- [ ] Refactor and cleanup code
+
 ### General
 - [ ] World map scene
 - [ ] Hideout scene
