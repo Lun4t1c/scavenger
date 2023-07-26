@@ -21,10 +21,8 @@ public class MutantProjectileScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Handle collision with other objects here (e.g., deal damage, apply effects)
-        // For example, you could destroy the projectile when it hits something:
-        if (collision.gameObject.tag == "Player") {
-            //Destroy(gameObject);
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Destructible") {
+            Destroy(gameObject);
         }
     }
 }

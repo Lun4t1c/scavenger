@@ -51,6 +51,11 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected abstract void Update();
 
+    protected void ShootBase()
+    {
+
+    }
+
     protected virtual void Shoot()
     {
         if (BulletsInMag == 0)
@@ -83,7 +88,7 @@ public abstract class WeaponBase : MonoBehaviour
                 {
                     float offset = 0.01f; // Tweak this value as needed
                     Vector3 spawnPosition = raycastHit.point + raycastHit.normal * offset;
-                    
+
                     // Create the image GameObject
                     GameObject imageGO = Instantiate(BulletHolePrefab, spawnPosition, Quaternion.identity);
 
@@ -128,7 +133,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (TotalAmmo == MaxTotalAmmo) return;
 
         TotalAmmo += amount;
-        if (TotalAmmo > MaxTotalAmmo) 
+        if (TotalAmmo > MaxTotalAmmo)
             TotalAmmo = MaxTotalAmmo;
 
         if (gameObject.active) NotifyTotalAmmoUpdate();
@@ -143,6 +148,6 @@ public abstract class WeaponBase : MonoBehaviour
     protected void NotifyCurrentAmmoUpdate() =>
         EventManager.OnCurrentAmmoUpdate?.Invoke($"{this.BulletsInMag}/{this.MagCapacity}");
 
-    protected void NotifyTotalAmmoUpdate() => 
+    protected void NotifyTotalAmmoUpdate() =>
         EventManager.OnTotalAmmoUpdate?.Invoke(TotalAmmo.ToString());
 }

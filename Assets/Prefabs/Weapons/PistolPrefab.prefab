@@ -234,12 +234,13 @@ MonoBehaviour:
   Range: 50
   ReloadDuration: 0
   BulletSpreadAngle: 0
-  GunEnd: {fileID: 0}
+  GunEnd: {fileID: 7556648848760747373}
   BulletHolePrefab: {fileID: 6573571930162282417, guid: d9a014c42e3c68b41a87cc11c1010b81, type: 3}
   MuzzleFlashPrefab: {fileID: 4490385477464634488}
   Audio: {fileID: 0}
   ShotSfx: {fileID: 8300000, guid: 100f5658070bef24089acc0e370fa827, type: 3}
   ReloadSfx: {fileID: 8300000, guid: 95df64bcb3f3ccf48bbe1129d9594948, type: 3}
+  projPrefab: {fileID: 6808306247665252782, guid: 7bcb5a41d95fb6244a0b32bb3128cde4, type: 3}
 --- !u!82 &7940190287430882472
 AudioSource:
   m_ObjectHideFlags: 0
